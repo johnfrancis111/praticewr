@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f4f4;
+        }
+
+        .main {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            padding: 20px;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .intro { max-width: 300px; }
+        .intro h2 { margin-bottom: 10px; }
+        .intro p { margin-bottom: 8px; color: #555; }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 250px;
+        }
+
+        .card img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 12px;
+        }
+
+        .card h1 { font-size: 1.1rem; margin-bottom: 6px; }
+        .card p { color: #888; font-size: 0.9rem; }
+
+        .form {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 300px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form h3 { margin-bottom: 6px; }
+        .form label { font-size: 0.85rem; color: #333; }
+        .form input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+
+        /* Joke Box */
+        .joke-box {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 280px;
+            text-align: center;
+        }
+
+        .joke-box h3 { margin-bottom: 12px; }
+
+        #joke-text {
+            font-size: 0.95rem;
+            color: #333;
+            min-height: 60px;
+            margin-bottom: 14px;
+            line-height: 1.5;
+        }
+
+        .punchline {
+            color: #e67e00;
+            font-weight: bold;
+            display: none;
+            margin-top: 8px;
+        }
+
+        .joke-box button, .country-box button {
+            background: #333;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin: 4px;
+        }
+
+        .joke-box button:hover { background: #555; }
+
+        #reveal-btn {
+            background: #e67e00;
+            display: none;
+        }
+
+        #reveal-btn:hover { background: #cf6d00; }
+
+        /* Country Box */
+        .country-box {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 280px;
+            width: 100%;
+        }
+
+        .country-box h3 { margin-bottom: 12px; text-align: center; }
+
+        .country-box input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .country-box button {
+            width: 100%;
+            background: #2c7be5;
+        }
+
+        .country-box button:hover { background: #1a5bbf; }
+
+        #country-result {
+            margin-top: 12px;
+            font-size: 0.9rem;
+            color: #333;
+            line-height: 1.7;
+            min-height: 40px;
+        }
+
+        #country-result .info-row {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #f0f0f0;
+            padding: 4px 0;
+        }
+
+        #country-result .info-row span:first-child {
+            color: #888;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main">
+
+        <div class="intro">
+            <h2>Hello world</h2>
+            <p>This is my first webpage.</p>
+            <p>We are a small web development team focused on building simple and useful websites for our clients.</p>
+        </div>
+
+        <div class="card">
+            <img src="Cool-Anime-Wallpapers.jpg" alt="Profile">
+            <h1>Nnopuechi Johnfrancis</h1>
+            <p>Web Developer</p>
+        </div>
+
+        <form class="form">
+            <h3>Contact Form</h3>
+            <label>Full Name:</label>
+            <input type="text" name="name" required>
+            <label>Gender:</label>
+            <input type="text" name="gender" required>
+            <label>Email:</label>
+            <input type="email" name="email" required>
+            <label>Password:</label>
+            <input type="password" name="password" required>
+        </form>
+
+        <div class="joke-box">
+            <h3>😂 Joke Generator</h3>
+            <div id="joke-text">Click the button to get a joke!</div>
+            <button onclick="fetchJoke()">Get Joke</button>
+            <button id="reveal-btn" onclick="revealPunchline()">Reveal Punchline</button>
+        </div>
+
+        <div class="country-box">
+            <h3>🌍 Country Info App</h3>
+            <input type="text" id="country-input" placeholder="Enter a country name..." />
+            <button onclick="fetchCountry()">Search</button>
+            <div id="country-result">Enter a country to see its info.</div>
+        </div>
+
+    </div>
+
+    <script>
+        // ---- Joke Generator (official-joke-api.appspot.com — no key needed) ----
+        async function fetchJoke() {
+            const jokeText = document.getElementById('joke-text');
+            const revealBtn = document.getElementById('reveal-btn');
+
+            jokeText.innerHTML = 'Loading...';
+            revealBtn.style.display = 'none';
+
+            try {
+                const res = await fetch('https://official-joke-api.appspot.com/random_joke');
+                const joke = await res.json();
+
+                jokeText.innerHTML = `<span>${joke.setup}</span><div class="punchline" id="punchline">${joke.punchline}</div>`;
+                revealBtn.style.display = 'inline-block';
+            } catch (err) {
+                jokeText.innerHTML = 'Could not load joke. Check your internet and try again!';
+            }
+        }
+
+        function revealPunchline() {
+            document.getElementById('punchline').style.display = 'block';
+            document.getElementById('reveal-btn').style.display = 'none';
+        }
+
+        // ---- Country Info App (restcountries.com — no key needed) ----
+        async function fetchCountry() {
+            const input = document.getElementById('country-input').value.trim();
+            const result = document.getElementById('country-result');
+
+            if (!input) { result.innerHTML = 'Please enter a country name.'; return; }
+
+            result.innerHTML = 'Loading...';
+
+            try {
+                const res = await fetch(`https://restcountries.com/v3.1/name/${encodeURIComponent(input)}`);
+
+                if (!res.ok) { result.innerHTML = 'Country not found. Check the spelling and try again.'; return; }
+
+                const data = await res.json();
+                const c = data[0];
+
+                const name = c.name.common;
+                const capital = c.capital ? c.capital[0] : 'N/A';
+                const population = c.population.toLocaleString();
+                const languages = c.languages ? Object.values(c.languages).join(', ') : 'N/A';
+                const currency = c.currencies ? Object.values(c.currencies).map(cur => `${cur.name} (${cur.symbol})`).join(', ') : 'N/A';
+                const continent = c.continents ? c.continents[0] : 'N/A';
+                const flag = c.flag || '';
+
+                result.innerHTML = `
+                    <div class="info-row"><span>🏳️ Country</span><span>${flag} ${name}</span></div>
+                    <div class="info-row"><span>🏙️ Capital</span><span>${capital}</span></div>
+                    <div class="info-row"><span>👥 Population</span><span>${population}</span></div>
+                    <div class="info-row"><span>🗣️ Language</span><span>${languages}</span></div>
+                    <div class="info-row"><span>💰 Currency</span><span>${currency}</span></div>
+                    <div class="info-row"><span>🌍 Continent</span><span>${continent}</span></div>
+                `;
+            } catch (err) {
+                result.innerHTML = 'Could not load country info. Check your internet and try again!';
+            }
+        }
+
+        document.getElementById('country-input').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') fetchCountry();
+        });
+    </script>
+
+</body>
+</html>
